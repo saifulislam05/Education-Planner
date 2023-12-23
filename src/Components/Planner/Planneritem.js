@@ -17,7 +17,7 @@ const PlannerItem = ({ item, onUpdateItem, onDeleteItem }) => {
           onClick={() =>
             onUpdateItem(item.id, { ...item, hours: item.hours + 1 })
           }
-          className="btn btn-sm btn-success rounded-xl"
+          className="btn btn-sm btn-success rounded-xl text-lg"
         >
           +
         </button>
@@ -25,7 +25,7 @@ const PlannerItem = ({ item, onUpdateItem, onDeleteItem }) => {
           onClick={() =>
             onUpdateItem(item.id, { ...item, hours: item.hours - 1 })
           }
-          className="btn btn-sm btn-success rounded-xl"
+          className="btn btn-sm btn-success rounded-xl text-lg"
         >
           -
         </button>
