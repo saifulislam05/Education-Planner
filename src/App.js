@@ -1,25 +1,35 @@
 // App.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Components/Header/Header";
 import PlannerList from "./Components/Planner/PlannerList";
 
 function App() {
   const [plannerItems, setPlannerItems] = useState([]);
 
+  useEffect(() => {
+    const storedItems = JSON.parse(localStorage.getItem("plannerItems")) || [];
+    setPlannerItems(storedItems);
+  }, []);
+
+  const updatePlannerItems = (newItems) => {
+    setPlannerItems(newItems);
+    localStorage.setItem("plannerItems", JSON.stringify(newItems));
+  };
+
   const handleAddItem = (newItem) => {
-    setPlannerItems([{ ...newItem, id: Date.now() }, ...plannerItems]);
+    updatePlannerItems([{ ...newItem, id: Date.now() }, ...plannerItems]);
   };
 
   const handleUpdateItem = (id, updatedItem) => {
     const updatedItems = plannerItems.map((item) =>
       item.id === id ? { ...item, ...updatedItem } : item
     );
-    setPlannerItems(updatedItems);
+    updatePlannerItems(updatedItems);
   };
 
   const handleDeleteItem = (id) => {
     const updatedItems = plannerItems.filter((item) => item.id !== id);
-    setPlannerItems(updatedItems);
+    updatePlannerItems(updatedItems);
   };
 
   return (
